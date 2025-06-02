@@ -15,28 +15,6 @@
     <script type="module" src="/src/main.jsx"></script>
   </body>
   <script>
-    window.fbAsyncInit = function () {
-      FB.init({
-        appId: "1457585152342967",
-        cookie: true,
-        xfbml: false, // تعطيل الشكل الافتراضي
-        version: "v22.0",
-      });
-    };
-
-    (function (d, s, id) {
-      var js,
-        fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) {
-        return;
-      }
-      js = d.createElement(s);
-      js.id = id;
-      js.src = "https://connect.facebook.net/en_US/sdk.js";
-      fjs.parentNode.insertBefore(js, fjs);
-    })(document, "script", "facebook-jssdk");
-  </script>
-  <script>
     const { Server } = require("socket.io");
     const io = new Server(server, {
       cors: {

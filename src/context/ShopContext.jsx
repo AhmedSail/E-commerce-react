@@ -92,7 +92,6 @@ const ShopContextProvider = (props) => {
 
   // Persist page state to localStorage whenever it changes
   useEffect(() => {
-    console.log("ShopContext: Saving page state to localStorage:", page);
     localStorage.setItem("currentPage", page);
   }, [page]);
 
