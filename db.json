@@ -1,3 +1,10 @@
 {
-  "users": []
+  "users": [
+    {
+      "id": "db3f",
+      "name": "Arsenio Jennings",
+      "email": "sdew2sdew0592855602@gmail.com",
+      "password": "$2b$10$n2uTRez2JoPtUv33XXldkOLvkoWl.Dj3w1WFGjtgCF5DxmwnBMNjK"
+    }
+  ]
 }
