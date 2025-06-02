@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playwrite+US+Modern:wght@100..400&display=swap"
+      rel="stylesheet"
+    />
+    <title>Mero Shop</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+  <script>
+    window.fbAsyncInit = function () {
+      FB.init({
+        appId: "1457585152342967",
+        cookie: true,
+        xfbml: false, // تعطيل الشكل الافتراضي
+        version: "v22.0",
+      });
+    };
+
+    (function (d, s, id) {
+      var js,
+        fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {
+        return;
+      }
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    })(document, "script", "facebook-jssdk");
+  </script>
+  <script>
+    const { Server } = require("socket.io");
+    const io = new Server(server, {
+      cors: {
+        origin: "http://localhost:5173",
+        methods: ["GET", "POST"],
+      },
+    });
+
+    io.on("connection", (socket) => {
+      console.log("✅ مسؤول متصل!");
+
+      socket.on("adminNotification", (order) => {
+        console.log("📩 استلم السيرفر الطلب:", order);
+        io.emit("adminNotification", order); // إرسال الحدث للجميع
+      });
+    });
+  </script>
+</html>
