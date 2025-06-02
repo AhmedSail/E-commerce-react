@@ -26,6 +26,7 @@ import socket from "./socket";
 import ProtectedRouteAdmin from "./pages/ProtectedRouteAdmin"; // Checks for localStorage.getItem("admin") === "true"
 import { MoonLoader } from "react-spinners";
 import ErrorPage from "./pages/ErrorPage";
+import { ToastContainer } from "react-toastify";
 const App = () => {
   // Get admin login status (login) and the user object (user)
   // Renaming login to isAdminLoggedIn for clarity
@@ -64,6 +65,7 @@ const App = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
+      <ToastContainer />
       {/* Use the combined 'isAdmin' flag to decide which major section to show */}
       {loading ? (
         <div className="flex justify-center items-center h-screen">

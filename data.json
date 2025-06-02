@@ -19,27 +19,5 @@
     "stripe_logo": "./stripe_logo.png",
     "cross_icon": "./cross_icon.png"
   },
-  "products": [
-    {
-      "id": "ggqi0e6",
-      "quantity": 0,
-      "name": "T-shirt",
-      "description": "Laboris nostrud volu",
-      "price": 28,
-      "image": [
-        "/assets/p_img2_1.png",
-        "/assets/p_img2_2.png",
-        "/assets/p_img2_3.png",
-        "/assets/p_img2_4.png"
-      ],
-      "category": "Men",
-      "subCategory": "Topwear",
-      "sizes": [
-        "S",
-        "L",
-        "XL"
-      ],
-      "bestseller": true
-    }
-  ]
+  "products": []
 }

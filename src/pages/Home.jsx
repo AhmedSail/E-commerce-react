@@ -10,7 +10,9 @@ const Home = () => {
   useEffect(() => {
     if (localStorage.getItem("fromLogin") === "true") {
       toast.success("Login Successfully, Welcome!");
-      localStorage.removeItem("fromLogin"); // إزالة العنصر لتجنب ظهوره مجدداً عند إعادة تحميل الصفحة
+      setTimeout(() => {
+        localStorage.removeItem("fromLogin");
+      }, [3000]); // إزالة العنصر لتجنب ظهوره مجدداً عند إعادة تحميل الصفحة
     }
   }, []);
 
