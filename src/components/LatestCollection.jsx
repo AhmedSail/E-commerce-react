@@ -23,8 +23,11 @@ const LatestCollection = () => {
           size={"text-3xl"}
         />
         <p className="text-xs m-auto sm:text-sm md:text-base w-3/4 text-gray-500 mt-5 font-semibold text-center">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the.
+          Discover our unique selection that blends elegance with quality. Every
+          piece is thoughtfully designed to bring you an exceptional experience,
+          combining modern style with fine craftsmanship. Our products are
+          tailored to suit every taste, making them the perfect choice for any
+          occasion.
         </p>
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5 gap-y-6 mt-10">

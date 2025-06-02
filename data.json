@@ -19,5 +19,6 @@
     "stripe_logo": "./stripe_logo.png",
     "cross_icon": "./cross_icon.png"
   },
-  "products": []
+  "products": [],
+  "ordersAdmin": []
 }

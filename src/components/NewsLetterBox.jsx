@@ -11,8 +11,9 @@ const NewsLetterBox = () => {
           Subscribe now & get 20% off
         </h1>
         <p className="text-gray-500 text-center">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur,
-          tempore.
+          Join our exclusive community and enjoy a 20% discount on your first
+          purchase! Stay updated with the latest trends, special offers, and
+          exciting deals—because you deserve the best at the best price.
         </p>
         <form
           onSubmit={submitHandler}

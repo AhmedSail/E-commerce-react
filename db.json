@@ -1,3 +1,10 @@
 {
-  "users": []
+  "users": [
+    {
+      "id": "cb84",
+      "name": "Amaya Adkins",
+      "email": "giromy@mailinator.com",
+      "password": "$2b$10$OJbhnbQV2HAYSBqkjACtU.gslNMMEAG4gxSByr31O/Prj6iF9mY1G"
+    }
+  ]
 }

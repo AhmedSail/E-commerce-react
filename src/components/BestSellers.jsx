@@ -23,8 +23,10 @@ const BestSellers = () => {
           size={"text-3xl"}
         />
         <p className="text-xs sm:text-sm md:text-base text-gray-600 w-3/4 m-auto text-center my-5">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Saepe,
-          perspiciatis.
+          Explore our most popular products, loved by customers for their
+          quality and unique design. These top-rated items combine style and
+          function, making them must-haves for any collection. Don’t miss out on
+          the favorites everyone is talking about!
         </p>
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6">
