@@ -1,27 +1,20 @@
 import React, { useState, useEffect, useContext } from "react";
 import Title from "../../components/Title"; // Assuming you have a Title component
 import { ShopContext } from "../../context/ShopContext"; // To get currency
+import axios from "axios";
 
 const OrderAdmin = () => {
   const [allOrders, setAllOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { currency } = useContext(ShopContext); // Get currency symbol
-
   useEffect(() => {
-    try {
-      const storedAdminOrders =
-        JSON.parse(localStorage.getItem("adminAllOrders")) || [];
-      // Optional: Sort orders by date, newest first
-      storedAdminOrders.sort(
-        (a, b) => new Date(b.orderDate) - new Date(a.orderDate)
-      );
-      setAllOrders(storedAdminOrders);
-    } catch (error) {
-      console.error("Error reading admin orders from localStorage:", error);
-      // Handle potential errors, e.g., corrupted data
-      setAllOrders([]);
-    }
-    setIsLoading(false);
+    axios
+      .get("http://localhost:3002/ordersAdmin")
+      .then((response) => {
+        setAllOrders(response.data);
+        setIsLoading(false);
+      })
+      .catch((error) => console.error("Error fetching Order:", error));
   }, []);
 
   if (isLoading) {
@@ -145,12 +138,10 @@ const OrderAdmin = () => {
                   </td>
                   <td
                     className={`${
-                      i.orderStatus === "Received"
-                        ? "text-green-600"
-                        : "text-red-600"
+                      i.orderStatus === true ? "text-green-600" : "text-red-600"
                     } font-bold`}
                   >
-                    {i.orderStatus === "Received" ? "Received" : "Sent"}
+                    {i.orderStatus === true ? "Received" : "Sent"}
                   </td>
                 </tr>
               ))}

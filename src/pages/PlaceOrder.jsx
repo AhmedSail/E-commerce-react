@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Title from "../components/Title";
 import { ShopContext } from "../context/ShopContext";
@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { removeAllFromCart } from "../Redux/CartSlice";
 import socket from "../socket";
 import { v4 as uuidv4 } from "uuid";
+import axios from "axios";
 
 const PlaceOrder = () => {
   // احصل على البيانات اللازمة من Context و Redux
@@ -22,7 +23,6 @@ const PlaceOrder = () => {
     setModel,
     tempAddress, // *** Import the notification function ***
   } = useContext(ShopContext);
-  const idOrder = uuidv4();
   const cart = useSelector(
     (state) =>
       state.cart[user?.email] || {
@@ -199,11 +199,12 @@ const PlaceOrder = () => {
       }
       const currentUserOrders = storedUsers[user.email].orders || [];
       const orderDate = new Date().toISOString();
+
       const newOrderItemsForUser = cart.products.map((item) => ({
         ...item,
         orderDate: orderDate,
         orderStatus: false,
-        uniqueId: idOrder,
+        id: crypto.randomUUID(),
       }));
       const updatedUserOrders = [...currentUserOrders, ...newOrderItemsForUser];
       storedUsers[user.email] = {
@@ -213,44 +214,49 @@ const PlaceOrder = () => {
       };
       localStorage.setItem("users", JSON.stringify(storedUsers));
       setUserOrders(updatedUserOrders); // Update context state for current user's orders
+      axios.get("http://localhost:3002/ordersAdmin").then((res) => {
+        const storedAdminOrders = res.data;
 
+        const newOrderItemsForAdmin = newOrderItemsForUser.map((item) => ({
+          ...item,
+          userEmail: user.email, // Add user email for admin tracking
+          deliveryInfo: { ...formData }, // Add delivery info
+        }));
+        const updatedAdminOrders = [
+          ...storedAdminOrders,
+          ...newOrderItemsForAdmin,
+        ];
+        newOrderItemsForAdmin.forEach(async (orderItem) => {
+          try {
+            await axios.post("http://localhost:3002/ordersAdmin", orderItem);
+          } catch (error) {
+            console.error("Error saving order:", error);
+          }
+        });
+        toast.success("Order added successfully!");
+        localStorage.setItem(
+          "adminAllOrders",
+          JSON.stringify(updatedAdminOrders)
+        );
+
+        // --- Send Admin Notification --- *** NEW ***
+        const firstProduct = cart.products[0];
+        const notificationPayload = {
+          userName: formData.firstName || user.email, // استخدام الاسم الأول أو البريد الإلكتروني
+          productName: firstProduct?.name || "Multiple Items",
+          address: `${formData.street}, ${formData.city}`,
+          imageUrl: firstProduct?.image ? firstProduct.image[0] : undefined,
+        };
+        console.log("⚡ إرسال إشعار إلى السيرفر:", notificationPayload);
+        socket.emit("adminNotification", notificationPayload);
+
+        // --- Cleanup and Navigation ---
+        dispatch(removeAllFromCart(user.email)); // Clear Redux cart
+        setUserCart([]); // Clear context cart state
+        toast.success("Order placed successfully!");
+        navigate(`/orders`); // Navigate to user's orders page
+      });
       // --- Admin All Orders Saving ---
-      const storedAdminOrders =
-        JSON.parse(localStorage.getItem("adminAllOrders")) || [];
-      const newOrderItemsForAdmin = cart.products.map((item) => ({
-        ...item,
-        orderDate: orderDate,
-        orderStatus: false,
-        uniqueId: idOrder,
-        userEmail: user.email, // Add user email for admin tracking
-        deliveryInfo: { ...formData }, // Add delivery info
-      }));
-      const updatedAdminOrders = [
-        ...storedAdminOrders,
-        ...newOrderItemsForAdmin,
-      ];
-
-      localStorage.setItem(
-        "adminAllOrders",
-        JSON.stringify(updatedAdminOrders)
-      );
-
-      // --- Send Admin Notification --- *** NEW ***
-      const firstProduct = cart.products[0];
-      const notificationPayload = {
-        userName: formData.firstName || user.email, // استخدام الاسم الأول أو البريد الإلكتروني
-        productName: firstProduct?.name || "Multiple Items",
-        address: `${formData.street}, ${formData.city}`,
-        imageUrl: firstProduct?.image ? firstProduct.image[0] : undefined,
-      };
-      console.log("⚡ إرسال إشعار إلى السيرفر:", notificationPayload);
-      socket.emit("adminNotification", notificationPayload);
-
-      // --- Cleanup and Navigation ---
-      dispatch(removeAllFromCart(user.email)); // Clear Redux cart
-      setUserCart([]); // Clear context cart state
-      toast.success("Order placed successfully!");
-      navigate(`/orders`); // Navigate to user's orders page
     } catch (error) {
       console.error("Error placing order:", error);
       toast.error(

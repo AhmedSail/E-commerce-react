@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import MultiImageUpload from "./MultiImageUpload";
 import { current } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
+import { ShopContext } from "../../context/ShopContext";
 
 const AdminHero = () => {
   const [added, setAdded] = useState(true);
-
+  const { navigate } = useContext(ShopContext);
   const [product, setProduct] = useState({
     id: Math.random().toString(36).substring(2, 9),
     quantity: 0,
@@ -68,6 +69,9 @@ const AdminHero = () => {
       await axios.post("http://localhost:3002/products", product);
       setAdded(!added);
       toast.success("Product added successfully!");
+      setTimeout(() => {
+        navigate("/admin/list");
+      }, [1500]);
     } catch (error) {
       console.error("Error adding product:", error);
       toast.error("Failed to add product.");
