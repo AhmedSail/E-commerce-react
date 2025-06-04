@@ -9,17 +9,14 @@ const Navres = ({ isOpen, setIsOpen }) => {
   return (
     <div
       className={`
-        fixed top-0 right-0 w-full h-screen z-30 transition-all  
+        fixed top-0 right-0 w-full h-screen z-30 transition-all   
          ${
            isOpen
-             ? "translate-x-0 opacity-100"
+             ? "translate-x-0 opacity-100 touch-none"
              : "translate-x-full opacity-0 pointer-events-none"
          }
         bg-white text-gray-600 font-semibold duration-200
       `}
-      // --- أضف هذا السطر ---
-      style={{ touchAction: isOpen ? "none" : "auto" }}
-      // --- نهاية الإضافة ---
     >
       <div
         className="flex justify-start items-center gap-3 px-2 py-2 cursor-pointer"
