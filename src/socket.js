@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
 
-const socket = io("http://172.16.5.61:5173", {
+const socket = io("https://e-commer-notifications.onrender.com", {
   transports: ["websocket"],
   reconnectionAttempts: 5,
   timeout: 5000,
