@@ -35,11 +35,10 @@ const Register = () => {
 
     // التحقق من صحة كلمة المرور:
     // يجب أن تكون 8 أحرف على الأقل وتحتوي على رقم، وحرف كبير، وحرف صغير، ورمز خاص
-    const passwordRegex =
-      /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&?])[A-Za-z\d!@#$%^&?]{8,}$/;
-    if (!passwordRegex.test(formData.password)) {
+
+    if (formData.password.length < 8 || !/[a-z]/.test(formData.password)) {
       toast.error(
-        "The password must be at least 8 characters long and include a number, an uppercase letter, a lowercase letter, and a special character."
+        "The password must be at least 8 characters long and include at least one lowercase letter."
       );
       return;
     }
@@ -54,10 +53,8 @@ const Register = () => {
         toast.error("User already exists!");
         return;
       }
-      const hashedPass = await bcrypt.hash(formData.password, 10);
       const newUser = {
         ...formData,
-        password: hashedPass,
       };
 
       // إذا لم يكن المستخدم موجوداً، نقوم بإرسال طلب POST لتسجيل المستخدم
