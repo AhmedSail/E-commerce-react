@@ -214,7 +214,7 @@ const PlaceOrder = () => {
       };
       localStorage.setItem("users", JSON.stringify(storedUsers));
       setUserOrders(updatedUserOrders); // Update context state for current user's orders
-      axios.get("http://localhost:3002/ordersAdmin").then((res) => {
+      axios.get("https://apijson-lial.onrender.com/ordersAdmin").then((res) => {
         const storedAdminOrders = res.data;
 
         const newOrderItemsForAdmin = newOrderItemsForUser.map((item) => ({
@@ -228,7 +228,10 @@ const PlaceOrder = () => {
         ];
         newOrderItemsForAdmin.forEach(async (orderItem) => {
           try {
-            await axios.post("http://localhost:3002/ordersAdmin", orderItem);
+            await axios.post(
+              "https://apijson-lial.onrender.com/ordersAdmin",
+              orderItem
+            );
           } catch (error) {
             console.error("Error saving order:", error);
           }

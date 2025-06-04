@@ -16,7 +16,7 @@ const LoginWithSocial = () => {
     try {
       // البحث عن المستخدم في قاعدة البيانات
       const response = await axios.get(
-        `http://localhost:3001/users?email=${userData.email}`
+        `https://apijson-lial.onrender.com/users?email=${userData.email}`
       );
       const existingUser = response.data[0]; // `json-server` يرجع مصفوفة
 
@@ -35,7 +35,7 @@ const LoginWithSocial = () => {
           picture: userData.picture || "",
         };
 
-        await axios.post("http://localhost:3001/users", newUser);
+        await axios.post("https://apijson-lial.onrender.com/users", newUser);
         localStorage.setItem("user", JSON.stringify(newUser));
         setUser(newUser);
         localStorage.setItem("fromLogin", "true");

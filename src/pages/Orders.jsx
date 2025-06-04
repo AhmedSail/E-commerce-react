@@ -23,49 +23,53 @@ const Orders = () => {
       cancelButtonText: "No, Not yet",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.get("http://localhost:3002/ordersAdmin").then((res) => {
-          const orderConfirmed = res.data.find((i) => i.id === _id);
-          console.log("orderConfirmed+++++++" + orderConfirmed.id);
+        axios
+          .get("https://apijson-lial.onrender.com/ordersAdmin")
+          .then((res) => {
+            const orderConfirmed = res.data.find((i) => i.id === _id);
+            console.log("orderConfirmed+++++++" + orderConfirmed.id);
 
-          const status = true; // تعديل الحالة محليًا
+            const status = true; // تعديل الحالة محليًا
 
-          // إرسال التحديث إلى قاعدة البيانات
-          axios
-            .delete(`http://localhost:3002/ordersAdmin/${orderConfirmed.id}`)
-            .then(() => {
-              console.log("تم حذف الطلب بنجاح");
+            // إرسال التحديث إلى قاعدة البيانات
+            axios
+              .delete(
+                `https://apijson-lial.onrender.com/ordersAdmin/${orderConfirmed.id}`
+              )
+              .then(() => {
+                console.log("تم حذف الطلب بنجاح");
 
-              // إنشاء الطلب الجديد بنفس البيانات مع تحديث الحالة
-              const updatedOrder = {
-                ...orderConfirmed,
-                orderStatus: true,
-              };
+                // إنشاء الطلب الجديد بنفس البيانات مع تحديث الحالة
+                const updatedOrder = {
+                  ...orderConfirmed,
+                  orderStatus: true,
+                };
 
-              // إرسال الطلب الجديد إلى قاعدة البيانات
-              return axios.post(
-                "http://localhost:3002/ordersAdmin",
-                updatedOrder
-              );
-            })
-            .then(() => console.log("تم إنشاء الطلب الجديد بالحالة المحدثة"))
-            .catch((err) => console.error("خطأ أثناء العملية:", err));
+                // إرسال الطلب الجديد إلى قاعدة البيانات
+                return axios.post(
+                  "https://apijson-lial.onrender.com/ordersAdmin",
+                  updatedOrder
+                );
+              })
+              .then(() => console.log("تم إنشاء الطلب الجديد بالحالة المحدثة"))
+              .catch((err) => console.error("خطأ أثناء العملية:", err));
 
-          // تحديث حالة الطلبات للمستخدم
-          setUserOrders((prev) =>
-            prev.filter((i) => i.id !== orderConfirmed?.id)
-          );
+            // تحديث حالة الطلبات للمستخدم
+            setUserOrders((prev) =>
+              prev.filter((i) => i.id !== orderConfirmed?.id)
+            );
 
-          let storedUsers = JSON.parse(localStorage.getItem("users")) || {};
-          if (storedUsers[user.email]) {
-            storedUsers[user.email].orders = storedUsers[
-              user.email
-            ].orders.filter((i) => i.id !== orderConfirmed?.id);
-            localStorage.setItem("users", JSON.stringify(storedUsers));
-          }
-        });
+            let storedUsers = JSON.parse(localStorage.getItem("users")) || {};
+            if (storedUsers[user.email]) {
+              storedUsers[user.email].orders = storedUsers[
+                user.email
+              ].orders.filter((i) => i.id !== orderConfirmed?.id);
+              localStorage.setItem("users", JSON.stringify(storedUsers));
+            }
+          });
 
         //   // تحديث أو إضافة الطلب في `adminAllOrders`
-        //   axios.get("http://localhost:3002/ordersAdmin").then((response) => {
+        //   axios.get("https://apijson-lial.onrender.com/ordersAdmin").then((response) => {
         //     let storedAdminOrders = response.data;
 
         //     storedAdminOrders = storedAdminOrders.map((order) =>
@@ -74,7 +78,7 @@ const Orders = () => {
         //         : order
         //     );
 
-        //     axios.put("http://localhost:3002/ordersAdmin", storedAdminOrders);
+        //     axios.put("https://apijson-lial.onrender.com/ordersAdmin", storedAdminOrders);
         //   });
 
         //   setUserOrders(updatedOrders);

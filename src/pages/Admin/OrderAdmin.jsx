@@ -9,7 +9,7 @@ const OrderAdmin = () => {
   const { currency } = useContext(ShopContext); // Get currency symbol
   useEffect(() => {
     axios
-      .get("http://localhost:3002/ordersAdmin")
+      .get("https://apijson-lial.onrender.com/ordersAdmin")
       .then((response) => {
         setAllOrders(response.data);
         setIsLoading(false);

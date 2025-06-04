@@ -9,7 +9,9 @@ const AdminUsers = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/users`);
+      const response = await axios.get(
+        `https://apijson-lial.onrender.com/users`
+      );
       setUsers(response.data);
     } catch (error) {
       console.error(
@@ -36,7 +38,7 @@ const AdminUsers = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(`http://localhost:3001/users/${id}`);
+          await axios.delete(`https://apijson-lial.onrender.com/users/${id}`);
           toast.success("Users deleted successfully!");
 
           // ✅ Refresh the list immediately after deletion

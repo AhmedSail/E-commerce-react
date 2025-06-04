@@ -66,7 +66,7 @@ const AdminHero = () => {
     }
 
     try {
-      await axios.post("http://localhost:3002/products", product);
+      await axios.post("https://apijson-lial.onrender.com/products", product);
       setAdded(!added);
       toast.success("Product added successfully!");
       setTimeout(() => {

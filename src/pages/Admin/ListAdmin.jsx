@@ -9,7 +9,9 @@ const ListAdmin = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get(`http://localhost:3002/products`);
+      const response = await axios.get(
+        `https://apijson-lial.onrender.com/products`
+      );
       setProducts(response.data);
     } catch (error) {
       console.error(
@@ -36,7 +38,9 @@ const ListAdmin = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(`http://localhost:3002/products/${id}`);
+          await axios.delete(
+            `https://apijson-lial.onrender.com/products/${id}`
+          );
           toast.success("Item deleted successfully!");
 
           // ✅ Refresh the list immediately after deletion

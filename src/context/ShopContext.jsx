@@ -56,7 +56,7 @@ const ShopContextProvider = (props) => {
   // Fetch products on initial load
   useEffect(() => {
     axios
-      .get("http://localhost:3002/products")
+      .get("https://apijson-lial.onrender.com/products")
       .then((response) => {
         setProducts(response.data);
       })

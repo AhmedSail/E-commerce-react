@@ -47,7 +47,7 @@ const Register = () => {
     try {
       // نتحقق من وجود مستخدم بنفس البريد الإلكتروني (يفترض أن تكون المصفوفة فارغة بعد عملية الحذف)
       const checkResponse = await axios.get(
-        `http://localhost:3001/users?email=${formData.email}`
+        `https://apijson-lial.onrender.com/users?email=${formData.email}`
       );
 
       if (checkResponse.data.length > 0) {
@@ -61,7 +61,10 @@ const Register = () => {
       };
 
       // إذا لم يكن المستخدم موجوداً، نقوم بإرسال طلب POST لتسجيل المستخدم
-      const response = await axios.post("http://localhost:3001/users", newUser);
+      const response = await axios.post(
+        "https://apijson-lial.onrender.com/users",
+        newUser
+      );
 
       if (response.status === 201) {
         localStorage.setItem("fromRegister", "true"); // تعيين الحالة
