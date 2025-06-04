@@ -21,13 +21,11 @@ const LoginWithSocial = () => {
       const existingUser = response.data[0]; // `json-server` يرجع مصفوفة
 
       if (existingUser) {
-        console.log("✅ المستخدم موجود، تسجيل الدخول...");
         localStorage.setItem("user", JSON.stringify(existingUser));
         setUser(existingUser);
         localStorage.setItem("fromLogin", "true");
         navigate("/", { replace: true });
       } else {
-        console.log("❌ المستخدم غير موجود، إنشاء حساب جديد...");
         const newUser = {
           id: userData.id || Date.now(),
           name: userData.name,
@@ -42,7 +40,6 @@ const LoginWithSocial = () => {
         navigate("/", { replace: true });
       }
     } catch (error) {
-      console.error("🚨 خطأ في التحقق من المستخدم:", error);
       toast.error("حدث خطأ أثناء تسجيل الدخول. حاول مرة أخرى.");
     }
   };
@@ -54,7 +51,6 @@ const LoginWithSocial = () => {
     )
       .then((res) => res.json())
       .then((userData) => {
-        console.log("📘 Facebook User Data:", userData);
         checkUserAndLogin({
           id: userData.id,
           name: userData.name,
@@ -63,7 +59,6 @@ const LoginWithSocial = () => {
         });
       })
       .catch((error) => {
-        console.error("Facebook Data Fetch Error:", error);
         toast.error("فشل في جلب بيانات المستخدم من Facebook.");
       });
   };

@@ -21,7 +21,6 @@ const ShopContextProvider = (props) => {
       const isLoggedIn = isAdmin === "true";
       return isLoggedIn;
     } catch (e) {
-      console.error("Error reading 'admin' flag from localStorage:", e);
       localStorage.removeItem("admin");
       return false;
     }

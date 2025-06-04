@@ -71,8 +71,6 @@ const CartSlice = createSlice({
           (item) => !(item.id === id && item.selectedSize === selectedSize)
         );
       }
-
-      console.log("Updated Cart after deletion:", state[userEmail]);
     },
     removeAllFromCart(state, action) {
       const userEmail = action.payload; // ✅ جلب البريد الإلكتروني للمستخدم
@@ -82,8 +80,6 @@ const CartSlice = createSlice({
       state[userEmail].products = []; // ✅ تفريغ المنتجات بالكامل
       state[userEmail].totalPrice = 0;
       state[userEmail].totalQuantity = 0;
-
-      console.log("Cart after clearing:", state[userEmail]); // ✅ تحقق من أن السلة أصبحت فارغة
     },
 
     increaseQuantity(state, action) {

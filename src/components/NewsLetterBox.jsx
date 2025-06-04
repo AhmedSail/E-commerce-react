@@ -10,7 +10,7 @@ const NewsLetterBox = () => {
         <h1 className="text-center font-semibold text-3xl">
           Subscribe now & get 20% off
         </h1>
-        <p className="text-gray-500 text-center w-[700px] mx-auto">
+        <p className="text-gray-500 text-center sm:w-1/2    mx-auto">
           Join our exclusive community and enjoy a 20% discount on your first
           purchase! Stay updated with the latest trends, special offers, and
           exciting deals.

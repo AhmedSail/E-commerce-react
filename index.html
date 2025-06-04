@@ -24,10 +24,7 @@
     });
 
     io.on("connection", (socket) => {
-      console.log("✅ مسؤول متصل!");
-
       socket.on("adminNotification", (order) => {
-        console.log("📩 استلم السيرفر الطلب:", order);
         io.emit("adminNotification", order); // إرسال الحدث للجميع
       });
     });

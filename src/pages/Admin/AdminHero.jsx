@@ -73,7 +73,6 @@ const AdminHero = () => {
         navigate("/admin/list");
       }, [1500]);
     } catch (error) {
-      console.error("Error adding product:", error);
       toast.error("Failed to add product.");
     }
   };

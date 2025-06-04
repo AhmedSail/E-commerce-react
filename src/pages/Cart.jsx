@@ -19,10 +19,7 @@ const Cart = () => {
   const cart = useSelector(
     (state) => state.cart[user?.email] || { products: [] }
   );
-  console.log("Cart for User:", cart);
   const products = cart.products;
-  const totalQuantity = cart?.totalQuantity || 0;
-  console.log("Total Items in Cart:", totalQuantity);
   const { delivery_fee } = useContext(ShopContext);
   const dispatch = useDispatch();
   const [address, setAddress] = useState("Main street, 0021");

@@ -250,7 +250,6 @@ const PlaceOrder = () => {
           address: `${formData.street}, ${formData.city}`,
           imageUrl: firstProduct?.image ? firstProduct.image[0] : undefined,
         };
-        console.log("⚡ إرسال إشعار إلى السيرفر:", notificationPayload);
         socket.emit("adminNotification", notificationPayload);
 
         // --- Cleanup and Navigation ---
@@ -261,7 +260,6 @@ const PlaceOrder = () => {
       });
       // --- Admin All Orders Saving ---
     } catch (error) {
-      console.error("Error placing order:", error);
       toast.error(
         "An error occurred while placing your order. Please try again."
       );

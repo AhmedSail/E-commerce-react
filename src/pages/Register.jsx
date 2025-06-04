@@ -36,7 +36,7 @@ const Register = () => {
     // التحقق من صحة كلمة المرور:
     // يجب أن تكون 8 أحرف على الأقل وتحتوي على رقم، وحرف كبير، وحرف صغير، ورمز خاص
 
-    if (formData.password.length < 8 || !/[a-z]/.test(formData.password)) {
+    if (formData.password.length <= 8 || !/[a-z]/.test(formData.password)) {
       toast.error(
         "The password must be at least 8 characters long and include at least one lowercase letter."
       );

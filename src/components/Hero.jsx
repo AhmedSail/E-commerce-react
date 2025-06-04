@@ -4,7 +4,6 @@ import { ShopContext } from "../context/ShopContext";
 
 const Hero = () => {
   const { user } = useContext(ShopContext);
-  console.log("user:" + user);
 
   return (
     <div>

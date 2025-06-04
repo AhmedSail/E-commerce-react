@@ -17,6 +17,9 @@ const Navres = ({ isOpen, setIsOpen }) => {
          }
         bg-white text-gray-600 font-semibold duration-200
       `}
+      // --- أضف هذا السطر ---
+      style={{ touchAction: isOpen ? "none" : "auto" }}
+      // --- نهاية الإضافة ---
     >
       <div
         className="flex justify-start items-center gap-3 px-2 py-2 cursor-pointer"
@@ -37,6 +40,8 @@ const Navres = ({ isOpen, setIsOpen }) => {
             className={`border-b-2 w-full last:border-none py-2 px-2 ${
               location.pathname === i.link ? "bg-black text-white" : ""
             }`}
+            // أضف هذا السطر لإغلاق القائمة عند النقر على رابط
+            onClick={() => setIsOpen(false)}
           >
             <Link to={i.link}>{i.title}</Link>
           </li>
